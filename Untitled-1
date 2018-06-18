@@ -3,9 +3,9 @@ css for home
 flask app for search
 database
 
-background: -moz-linear-gradient(to bottom right, rgba(0,0,0,0), rgba(0,0,0,100)), url('Reaper_pic.png') no-repeat;
-background: -webkit-gradient(linear, to bottom right, rgba(0,0,0,0), rgba(0,0,0,100)), url('Reaper_pic.png') no-repeat;
-background: -webkit-linear-gradient(to bottom right, rgba(0,0,0,0), rgba(0,0,0,100)), url('Reaper_pic.png') no-repeat;
-background: -o-linear-gradient(top left, rgba(0,0,0,0), rgba(0,0,0,100)), url('Reaper_pic.png') no-repeat;
-background: -ms-linear-gradient(top left, rgba(0,0,0,0), rgba(0,0,0,100)), url('Reaper_pic.png') no-repeat;
-background: linear-gradient(to bottom right, rgba(0,0,0,0), rgba(0,0,0,100)), url('Reaper_pic.png') no-repeat;
+if request.method == "POST":
+        code = request.form.get('coursecode')
+        code = code + "wow"
+        render_template('grim_reaper.html', output = code)
+    else:
+        render_template('grim_reaper.html', output = '')
