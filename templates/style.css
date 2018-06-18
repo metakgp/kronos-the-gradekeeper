@@ -1,0 +1,86 @@
+body{
+    margin: auto;
+    background: rgba(0, 0, 0, 0.5);
+    background-position:center top;
+    background-repeat: no-repeat;
+   /*background-image: url('Background.jpeg');
+    opacity:1.5;
+ */   background-position-y: center;
+}
+
+body.n
+h1 {
+    min-height: 100%;
+    margin: auto;
+    width: 75%;
+    /*border: 3px solid rgb(3, 48, 3);
+    background-color: rgb(178, 187, 194);*/
+    padding: 80px;
+    color: #360505;;
+}
+
+form{
+    font-size: 24px;
+    padding: 20px;
+}
+
+.formsection{
+    min-height: 100%;
+    margin: auto;
+    width: 75%;
+    /*border: 3px solid rgb(3, 48, 3);
+    background-color: rgb(178, 187, 194);
+    padding: 100px;*/
+}
+
+#query{
+    height: 40%;
+    width: 75%;
+    font-size: 24px;
+}
+
+#submit_button{
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 18px;
+    font-size: 24px;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(200px, auto);
+    
+    border-style: solid;
+    border-color: black;
+    border-width: 0px;
+}
+
+.one {
+    grid-column: 1;
+    grid-row: 1;
+
+    
+/*  border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    
+
+    background: url('Reaper_pic.png') no-repeat;
+*/  height: 200px;
+
+}
+
+.two { 
+    grid-column: 2 / 6;
+    grid-row: 1 ;
+    white-space: nowrap;
+    opacity: 1;
+ /* border-style: solid;
+    border-color: rgb(221, 31, 31);
+    border-width: 4px;
+    padding: 10px;*/
+    }
