@@ -17,6 +17,6 @@
             </div>
         </div>
         <h1>{{numberRecords}} records found for {{courseCode}}</h1>
-        <img src="{{ url_for('figure',filename = 'combinedGrades.jpg')}}">
+        <img src="{{ url_for('figure',filename = courseCode + '.jpg')}}">
     </body>
 </html>
