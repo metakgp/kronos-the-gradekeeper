@@ -9,6 +9,6 @@ def SearchGrades(courseCode):
     except:
         courseMatched = 'NA'
     
-    print(courseMatched)
+    return(courseMatched)
 
-#SearchGrades('CH62028')
+
