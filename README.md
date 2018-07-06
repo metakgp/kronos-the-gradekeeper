@@ -28,4 +28,4 @@ Python packages required:
 
 
 ## Example
-r
+![Example](https://github.com/Ayushkaushal/Grim_Reaper/blob/master/example.gif)
