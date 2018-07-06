@@ -9,18 +9,21 @@ app = Flask(__name__)
 
 @app.route('/', methods = ['GET','POST'])
 def home():
+
     if request.method == "POST":
         code = request.form.get('getCode')
         code = code.upper()
         code = "".join(code.split())
-        print (code)
+        
+        #print (code)
 
         Grades = SearchGrades(code)
         numberRecords = len (Grades)
-        print '\n\n'
-        print (Grades)
-        print (numberRecords)
-        print '\n\n'
+        
+        #print '\n\n'
+        #print (Grades)
+        #print (numberRecords)
+        
         if( Grades == 'NA'):
 
             if len (code) == 7 and code[:2].isalpha() and code[-5:].isdigit() :
@@ -46,5 +49,8 @@ def figure(filename):
     return send_from_directory('figure', filename)
 
 
-#if __name__=="__main__" :
-app.run()
+if __name__=="__main__" :
+    app.run()
+else:
+    #print ("/n /n /n hmmmm : ") 
+    print(__name__)
