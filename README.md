@@ -1,30 +1,30 @@
-#Grim_Reaper
+# Grim_Reaper
 
 This webapp displays previous year's grade distribution. Here the blood-curdling grade distribution reaps your soul on every request you make.
 
-##Installation guide
+## Installation guide
 
 Python packages required:
 
 
--Install flask:
+- Install flask:
   'pip install Flask'
 
--Install PIL:
+- Install PIL:
   'pip install Pillow'
 
--Install matplotlib:
+- Install matplotlib:
   'pip install matplotlib'
 
--Install json:
+- Install json:
   'pip install json'
 
-##Running the app
+## Running the app
 
-*Commands for running flask:
+* Commands for running flask:
   'export FLASK_APP = app.py'
   'python app.py'
 
-*In a web browser, open link: http://localhost:5000/
+* In a web browser, open link: http://localhost:5000/
 
-##Example
+## Example
