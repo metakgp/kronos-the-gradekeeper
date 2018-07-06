@@ -6,17 +6,19 @@
         <link rel = "stylesheet" type = "text/css" href = "{{url_for('static', filename = 'style.css')}}" />
         <title>{{courseCode}}</title>
     </head>
+    
     <body class = "background_">
-        <div class="wrapper">
-            <div class="one">
-                <img src="{{ url_for('static', filename = 'Reaper_pic.png') }}">
+        <div class = "wrapper">
+            <div class = "one">
+                <img src = "{{ url_for('static', filename = 'Reaper_pic.png') }}">
             </div>
 
             <div class="two">
-                <h1>Click <a href= "/">here</a> to go back</h1>
+                <h1>Click <a href = "/">here</a> to go back</h1>
             </div>
         </div>
+
         <h1>{{numberRecords}} records found for {{courseCode}}</h1>
-        <img src="{{ url_for('figure',filename = courseCode + '.jpg')}}">
+            <img src = "{{ url_for('figure',filename = courseCode + '.jpg') }}" id = "graph">
     </body>
 </html>

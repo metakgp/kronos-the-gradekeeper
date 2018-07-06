@@ -8,13 +8,10 @@ body{
  */   background-position-y: center;
 }
 
-body.n
 h1 {
     min-height: 100%;
     margin: auto;
     width: 75%;
-    /*border: 3px solid rgb(3, 48, 3);
-    background-color: rgb(178, 187, 194);*/
     padding: 80px;
     color: #360505;;
 }
@@ -28,9 +25,6 @@ form{
     min-height: 100%;
     margin: auto;
     width: 75%;
-    /*border: 3px solid rgb(3, 48, 3);
-    background-color: rgb(178, 187, 194);
-    padding: 100px;*/
 }
 
 #query{
@@ -48,6 +42,13 @@ form{
     font-size: 24px;
 }
 
+#graph{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
 .wrapper {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -62,16 +63,7 @@ form{
 .one {
     grid-column: 1;
     grid-row: 1;
-
-    
-/*  border-style: solid;
-    border-color: black;
-    border-width: 2px;
-    
-
-    background: url('Reaper_pic.png') no-repeat;
-*/  height: 200px;
-
+    height: 200px;
 }
 
 .two { 
@@ -79,8 +71,4 @@ form{
     grid-row: 1 ;
     white-space: nowrap;
     opacity: 1;
- /* border-style: solid;
-    border-color: rgb(221, 31, 31);
-    border-width: 4px;
-    padding: 10px;*/
     }
