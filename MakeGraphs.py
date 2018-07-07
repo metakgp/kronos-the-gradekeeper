@@ -44,6 +44,11 @@ def MakeGraphs(val, code) :
         plt.bar(x_groups,y_values)
         plt.title(semester)
         plt.ylabel('No of students')
+
+        for i in range(0,7):
+            if(y_values[i]>0):
+                plt.text ( x = i-0.2, y = y_values[i]+0.005, s = y_values[i], size = 12)
+
         plt.savefig('Grades/Temp_files/%s.png' % semester)
         plt.close()
         #numberOfImage = numberOfImage+1
@@ -52,4 +57,4 @@ def MakeGraphs(val, code) :
     CombineImage(val, code)
 
 
-#MakeGraphs(val)
+#MakeGraphs(val,'2')
