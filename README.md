@@ -29,3 +29,34 @@ Python packages required:
 
 ## Example
 ![Example](https://github.com/Ayushkaushal/Grim_Reaper/blob/master/example.gif)
+
+
+
+# Adding new grades from erp
+
+## Installation guide
+
+- Install json: `pip install json`
+
+- Install regex/re  : `pip install regex`
+
+## Running the app
+
+This has two steps:
+
+##### Adding cookie:
+
+  1. Login to your erp account. Go to Student Academic Activities (UG) section in Academic. This gives you a cookie for accesing the /Acad route. You will not be able to mine the grades without this.
+  
+  2.Get the content of the JSID#/Acad named cookie set by ERP. Most web browsers enable you to view cookies from settings . It should be something like '0906E89CA7F4BDDE983B34012BDFFA08.worker3'. Update this in getNewGrades.py under the cookie variable.
+  
+ #### Mine grades:
+ 
+  (This will only work if done after adding cookie of your session.)
+  
+  Run the following code:
+  `python getNewGrades.py <YearSemester>`
+  The command line argument string passed should have both Year and semester for which the grades are being displayed on erp.
+  
+  Example : if you update grades at the end of spring 2018, then pass the argument as 2019Spring or prefereably something similar convering same information
+  
