@@ -1,7 +1,8 @@
 #This python file merges the data from individual semester record containing json files into
 #into yearWiseGrades.json. This will result in faster searching.
-
 import json
+import os
+
 
 def addNewCourse(course,grades,year): #This function is meant for new courses for which there wasnt any info
     jsonFile = open("yearWiseGrades.json", "r")
@@ -18,6 +19,7 @@ def addNewCourse(course,grades,year): #This function is meant for new courses fo
 
 
 def addGrade(keys,value,year):
+    
     
     json_file_main = open("yearWiseGrades.json", "r")
     data_main = json.load (json_file_main)
@@ -42,10 +44,10 @@ def addGrade(keys,value,year):
 
 
 def read_file(filename):
-    with open('pastYearRecords/%s.json' % filename) as json_file:  
+    os.chdir(os.getcwd() + '/Grades')
+    with open(os.getcwd() +'/past_records/' + filename + '.json' ) as json_file:  
         data = json.load(json_file)
-
         for keys, value in data.iteritems():
             addGrade(keys,value,filename)
     
-read_file('2017Autumn')
+#read_file('2000Spring')
