@@ -20,7 +20,7 @@ Python packages required:
 
 * Commands for running flask:
   ```
-  export FLASK_APP = app.py
+  export FLASK_APP=app.py
   python app.py
   ```
 
