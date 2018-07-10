@@ -37,13 +37,17 @@ def CombineImage(val, code): #Function to stich gaphs together into one image
 
 
 def MakeGraphs(val, code) :
-    #numberOfImage=0
-    for semester, grades in val.iteritems():
+
+    for semester, grades in val.items():
+        x = range(7)
         x_groups = ['EX', 'A', 'B', 'C', 'D', 'P', 'F']
         y_values = [grades['EX'],grades['A'],grades['B'],grades['C'],grades['D'],grades['P'],grades['F']]
-        plt.bar(x_groups,y_values)
+                
+        plt.bar(x,y_values)
         plt.title(semester)
         plt.ylabel('No of students')
+        plt.xticks(x, x_groups)# rotation='vertical')
+       
 
         for i in range(0,7):
             if(y_values[i]>0):
