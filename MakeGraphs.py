@@ -7,6 +7,9 @@ import shutil
 
 #val = {'2017Autumn': {'A': 12, 'C': 2, 'B': 3, 'D': 0, 'F': 0, 'P': 0, 'EX': 8}, '2018Spring': {'A': 6, 'C': 3, 'B': 6, 'D': 3, 'F': 0, 'P': 3, 'EX': 4}, '2016Spring': {'A': 2, 'C': 0, 'B': 1, 'D': 0, 'F': 0, 'P': 0, 'EX': 3}, '2017Spring': {'A': 12, 'C': 2, 'B': 3, 'D': 0, 'F': 0, 'P': 0, 'EX': 8}}
 
+
+x_groups = ['EX', 'A', 'B', 'C', 'D', 'P', 'F']
+
 def RemovePreviousImage(): #Deletes the previously stiched graph containg image.
     mydir = 'figure/'
     filelist = [ f for f in os.listdir(mydir) if f.endswith(".jpg") ]
@@ -18,7 +21,9 @@ def CombineImage(val, code): #Function to stich gaphs together into one image
     list_graphs = []
     for semester, grades in val.iteritems():
         list_graphs.append('Grades/Temp_files/%s.png' % semester)
-        list_graphs.sort()
+
+    list_graphs.append('Grades/Temp_files/HistoricalAverage.png')
+    list_graphs.sort()
 
     images = map(Image.open, list_graphs)
     widths, heights = zip(*(i.size for i in images))
@@ -35,19 +40,12 @@ def CombineImage(val, code): #Function to stich gaphs together into one image
     for deleteImage in list_graphs:
         os.remove('%s' % deleteImage)
 
+def GeneratePlots(x_groups,x,y_values,semester) :
 
-def MakeGraphs(val, code) :
-
-    for semester, grades in val.items():
-        x = range(7)
-        x_groups = ['EX', 'A', 'B', 'C', 'D', 'P', 'F']
-        y_values = [grades['EX'],grades['A'],grades['B'],grades['C'],grades['D'],grades['P'],grades['F']]
-                
         plt.bar(x,y_values)
         plt.title(semester)
         plt.ylabel('No of students')
-        plt.xticks(x, x_groups)# rotation='vertical')
-       
+        plt.xticks(x, x_groups)
 
         for i in range(0,7):
             if(y_values[i]>0):
@@ -55,7 +53,27 @@ def MakeGraphs(val, code) :
 
         plt.savefig('Grades/Temp_files/%s.png' % semester)
         plt.close()
-        #numberOfImage = numberOfImage+1
+
+def MakeGraphs(val, code) :
+    number_courses = 0
+    total_grades = [0] * 7 #This variable stores sum of grades corresponding to EX, A, B, C, D, P, F
+    
+    x = range(7)
+    for semester, grades in val.items():
+        y_values = [grades['EX'],grades['A'],grades['B'],grades['C'],grades['D'],grades['P'],grades['F']]
+        
+        for i in range(7):
+            total_grades[i] = total_grades[i] + y_values[i]
+
+        GeneratePlots(x_groups,x,y_values,semester)
+        number_courses = number_courses+1
+    
+    avg_grades = [0.0] * 7
+
+    for i in range(7):
+        avg_grades[i] = float(total_grades[i])/number_courses
+
+    GeneratePlots(x_groups,x,avg_grades,'HistoricalAverage')
 
     RemovePreviousImage()
     CombineImage(val, code)
