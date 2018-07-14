@@ -19,7 +19,7 @@ def RemovePreviousImage(): #Deletes the previously stiched graph containg image.
 
 def CombineImage(val, code): #Function to stich gaphs together into one image
     list_graphs = []
-    for semester, grades in val.iteritems():
+    for semester, grades in val.items():
         list_graphs.append('Grades/Temp_files/%s.png' % semester)
 
     list_graphs.append('Grades/Temp_files/HistoricalAverage.png')
