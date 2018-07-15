@@ -82,5 +82,5 @@ def main():
     
     read_file(semester)
 
-if __name__ == '__main__':
+if __name__ == '__main__' and len (sys.argv) > 1:
     main()
