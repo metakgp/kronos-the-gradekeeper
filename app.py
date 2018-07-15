@@ -9,20 +9,14 @@ app = Flask(__name__)
 
 @app.route('/', methods = ['GET','POST'])
 def home():
-
     if request.method == "POST":
         code = request.form.get('getCode')
         code = code.upper()
         code = "".join(code.split())
-        
-        #print (code)
+
 
         Grades = SearchGrades(code)
         numberRecords = len (Grades)
-        
-        #print '\n\n'
-        #print (Grades)
-        #print (numberRecords)
         
         if( Grades == 'NA'):
 
@@ -45,12 +39,12 @@ def invalid_code():
 
 
 @app.route('/figure/<filename>')
-def figure(filename): 
+def figure(filename):
     return send_from_directory('figure', filename)
 
 
 if __name__=="__main__" :
     app.run()
 else:
-    #print ("/n /n /n hmmmm : ") 
+    #print ("/n /n /n hmmmm  ") 
     print(__name__)

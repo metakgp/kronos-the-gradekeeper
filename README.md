@@ -8,20 +8,20 @@ This webapp displays previous year's grade distribution. Here the blood-curdling
 Python packages required:
 
 
-- Install flask: `pip install Flask`
+- Install flask: `pip3 install Flask`
 
-- Install PIL: `pip install Pillow`
+- Install PIL: `pip3 install Pillow`
 
-- Install matplotlib: `pip install matplotlib`
+- Install matplotlib: `pip3 install matplotlib`
 
-- Install json: `pip install json`
+- Install json: `pip3 install json`
 
 ## Running the app
 
 * Commands for running flask:
   ```
   export FLASK_APP=app.py
-  python app.py
+  python3 app.py
   ```
 
 * In a web browser, open link: http://localhost:5000/
