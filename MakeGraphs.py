@@ -13,6 +13,16 @@ from io import BytesIO
 
 x_groups = ['EX', 'A', 'B', 'C', 'D', 'P', 'F']
 
+def DrawLineHistorical():
+    im = Image.open('Grades/Temp_files/HistoricalAverage.png')
+
+    width, height = im.size
+    for x in range(width):
+        for y in range(12):
+            im.putpixel((x,y),(146,138,138))
+    
+    im.save('Grades/Temp_files/HistoricalAverage.png')
+
 def RemovePreviousStitichedImage(): #Deletes the previously stiched graph containg image.
     mydir = 'figure/'
     filelist = [ f for f in os.listdir(mydir) if f.endswith(".jpg") ]
@@ -61,10 +71,9 @@ def CombineImage(val, code): #Function to stich gaphs together into one image
     
 
 def GeneratePlots(x_groups,x,y_values,semester) :
-        print("swfewqfwge")
+
         
         plt.bar(x,y_values)
-        print("eiwjfqiofjoiweqfj")
         plt.title(semester)
         
         plt.ylabel('No of students')
@@ -72,7 +81,7 @@ def GeneratePlots(x_groups,x,y_values,semester) :
         
         for i in range(0,7):
             if(y_values[i]>0):
-                plt.text ( x = i-0.2, y = y_values[i]+0.005, s = y_values[i], size = 12)
+                plt.text ( x = i-0.3, y = y_values[i]+0.005, s = y_values[i], size = 12)
         
         plt.savefig('Grades/Temp_files/%s.png' % semester)
         plt.close()
@@ -83,14 +92,14 @@ def MakeGraphs(val, code) :
     number_courses = 0
     total_grades = [0] * 7 #This variable stores sum of grades corresponding to EX, A, B, C, D, P, F
 
-    print("Makegraphbegin")
+    #print("Makegraphbegin")
     for semester, grades in val.items():
         x = range(7)
         y_values = [grades['EX'],grades['A'],grades['B'],grades['C'],grades['D'],grades['P'],grades['F']]
         
         for i in range(7):
             total_grades[i] = total_grades[i] + y_values[i]
-        print("generating grpahs")
+
         GeneratePlots(x_groups,x,y_values,semester)
         number_courses = number_courses+1
     
@@ -102,7 +111,8 @@ def MakeGraphs(val, code) :
     GeneratePlots(x_groups,x,avg_grades,'HistoricalAverage')
     
     RemovePreviousStitichedImage()
+    DrawLineHistorical()
     CombineImage(val, code)
-    print ("Makegraph_end")
+    #print ("Makegraph_end")
 
 #MakeGraphs(val,'2')
