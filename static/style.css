@@ -1,74 +1,57 @@
 body{
     margin: auto;
-    background: rgba(0, 0, 0, 0.5);
-    background-position:center top;
-    background-repeat: no-repeat;
-   /*background-image: url('Background.jpeg');
-    opacity:1.5;
- */   background-position-y: center;
+    background: linear-gradient(to right, lightseagreen, violet);
 }
 
 h1 {
-    min-height: 100%;
-    margin: auto;
-    width: 75%;
-    padding: 80px;
-    color: #360505;;
+    color: white;
+    font-style: normal;
 }
 
-form{
-    font-size: 24px;
-    padding: 20px;
-}
-
-.formsection{
-    min-height: 100%;
-    margin: auto;
-    width: 75%;
-}
-
-#query{
-    height: 40%;
-    width: 75%;
-    font-size: 24px;
-}
-
-#submit_button{
+.jumbotron {
+    background: black !important;
+    width: 100%;
     text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 18px;
-    font-size: 24px;
 }
 
-#graph{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+.container {
+    width: 100%;
+    background: transparent;
 }
 
-.wrapper {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 10px;
-    grid-auto-rows: minmax(200px, auto);
-    
-    border-style: solid;
-    border-color: black;
-    border-width: 0px;
+
+#query {
+    text-align: center;
 }
 
-.one {
-    grid-column: 1;
-    grid-row: 1;
-    height: 200px;
+#query:focus {
+    background: lightcyan;
+    text-align: center;
 }
 
-.two { 
-    grid-column: 2 / 6;
-    grid-row: 1 ;
-    white-space: nowrap;
-    opacity: 1;
-    }
+label { 
+    width: 100%;
+    margin: auto;
+    font-size: 20px;
+}
+
+.row {
+    margin-bottom: 10px; 
+}
+
+.control-label {
+    margin: auto;
+}
+
+form {
+    background-color: transparent;
+    padding: 10px 10px 10px 10px;
+}
+
+.btn {
+    border-radius: 100px;
+}
+
+.btn:hover {
+    box-shadow: 1px 1px 1px lightblue;
+}
