@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <title>Kronos/{{courseCode}}</title>
+        <link 
+        rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" 
+        integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" 
+        crossorigin="anonymous">
+        <link rel = "stylesheet" type = "text/css" href = "{{url_for('static', filename = 'style.css')}}">
+    </head>
+    <body>
+        <div class="jumbotron">
+            <h1>Kronos</h1>
+        </div>
+        <div class="container">                
+                <form class="form-horizontal" method="POST">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <label class="control-label col-sm-8" for="email">You are just a click away!</label>
+                            <div class="col-sm-1"></div>
+                        </div>
+                        <div class="col-sm-10">
+                        <input 
+                        type = "text"  
+                        id = "query" 
+                        class="form-control" 
+                        placeholder = "Enter course code here" 
+                        name = "getCode"
+                        >
+                      </div>
+                    </div>
+                    <div class="form-group"> 
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type = "submit" class="btn btn-primary btn-block" name = "search" id = "submit_button" onclick="myFunction({{result}})">
+                        </div>
+                    </div>
+                    <div id="show-grades" style="visibility:hidden">
+                        <h1>{{numberRecords}} record(s) found for {{courseCode}}</h1>
+                        <img src = "{{ url_for('figure',filename = courseCode + '.jpg') }}" id = "graph">
+                    </div>
+                    <div id="invalid-code" style="visibility:hidden">
+                        <h1>INVALID CODE!</h1>
+                    </div>
+                    <div id="no-data" style="visibility:hidden">
+                        <h1>Sorry, no data available for that coursecode</h1>
+                    </div>
+                </form>
+        </div>
+        <script>
+        function hide_blocks(display_id){
+            var x = document.getElementById(display_id);
+            x.style.visibility = "visible";
+            x.style.display = "none";
+        }
+        function show_blocks(display_id){
+            var x = document.getElementById(display_id);
+            x.style.visibility = "visible";
+            x.style.display = "block";
+        }
+        display_id= "{{result}}"; 
+
+        if(display_id=="show-grades") {
+            show_blocks(display_id);
+        }
+        else    if(display_id=="invalid-code") {
+                    show_blocks(display_id);
+                }
+        else    if(display_id=="no-data") {
+                    show_blocks(display_id);
+                }
+        </script>
+        <!--<script type="text/javascript" src="{{ url_for('static', filename='scriptjs.js') }}"></script>
+        -->
+    </body>
+</html>

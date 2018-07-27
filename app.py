@@ -5,7 +5,7 @@ from SearchGrades import SearchGrades
 from MakeGraphs import MakeGraphs
 
 app = Flask(__name__)
-
+numberRecords=0
 
 @app.route('/', methods = ['GET','POST'])
 def home():
@@ -14,28 +14,23 @@ def home():
         code = code.upper()
         code = "".join(code.split())
 
-
         Grades = SearchGrades(code)
         numberRecords = len (Grades)
         
         if( Grades == 'NA'):
 
             if len (code) == 7 and code[:2].isalpha() and code[-5:].isdigit() :
-                return render_template('no_data.html',output = '')
+                return render_template('kronos.html',courseCode = code, numberRecords = numberRecords,result = "no-data")
             else:
-                return render_template('invalid_code.html',output = '')
+                return render_template('kronos.html',courseCode = code, numberRecords = numberRecords,result = "invalid-code")
         
         else:
             MakeGraphs(Grades,code)
-            return render_template('result.html',courseCode = code, numberRecords = numberRecords)
+            return render_template('kronos.html',courseCode = code, numberRecords = numberRecords,result = "show-grades")
 
     else:
-        return render_template('grim_reaper.html', output = '')
-
-
-@app.route('/invalid_code')    
-def invalid_code():    
-    return render_template('invalid_code.html',output = '')
+        code ="skf"
+        return render_template('kronos.html',courseCode = '', numberRecords = '',result = "")
 
 
 @app.route('/figure/<filename>')

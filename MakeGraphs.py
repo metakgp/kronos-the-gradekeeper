@@ -38,7 +38,7 @@ def RemovePreviousInvidualGraphs(): #Deletes the previously stiched graph contai
         os.remove(os.path.join(mydir, f))
 
 
-def CombineImage(val, code): #Function to stich gaphs together into one image
+def CombineImage(val, code, number_courses): #Function to stich gaphs together into one image
     total_height = 0
     max_width = 0
     courses_available_sorted = []
@@ -51,12 +51,12 @@ def CombineImage(val, code): #Function to stich gaphs together into one image
 
     courses_available_sorted.sort()
     #The following code is for historical average
-
-    im = Image.open('Grades/Temp_files/HistoricalAverage.png')
-    width, height = im.size
-    total_height = total_height + height
-    max_width = max(max_width,width)
-    courses_available_sorted.append('HistoricalAverage')
+    if(number_courses>1):
+        im = Image.open('Grades/Temp_files/HistoricalAverage.png')
+        width, height = im.size
+        total_height = total_height + height
+        max_width = max(max_width,width)
+        courses_available_sorted.append('HistoricalAverage')
     
     img = Image.new('RGB', (max_width, total_height ))
     y_offset = 0
@@ -107,12 +107,13 @@ def MakeGraphs(val, code) :
 
     for i in range(7):
         avg_grades[i] = float(total_grades[i])/number_courses
-
-    GeneratePlots(x_groups,x,avg_grades,'HistoricalAverage')
     
+    if(number_courses>1):
+        GeneratePlots(x_groups,x,avg_grades,'HistoricalAverage')
+        DrawLineHistorical()
     RemovePreviousStitichedImage()
-    DrawLineHistorical()
-    CombineImage(val, code)
+    
+    CombineImage(val, code, number_courses)
     #print ("Makegraph_end")
 
 #MakeGraphs(val,'2')
