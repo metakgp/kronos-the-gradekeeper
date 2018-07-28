@@ -16,7 +16,7 @@
             <h1>Kronos</h1>
         </div>
         <div class="container">                
-                <form class="form-horizontal" method="POST">
+                <form class="form-horizontal" method="POST" autocomplete="off"
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-3"></div>
@@ -30,7 +30,14 @@
                         class="form-control" 
                         placeholder = "Enter course code here" 
                         name = "getCode"
+                        list="courses_valid"
                         >
+                        <datalist id ="courses_valid">
+                            {% for c in courses %}
+                                <option value="{{c}}"></option>
+
+                            {% endfor %}
+                        </datalist>
                       </div>
                     </div>
                     <div class="form-group"> 
