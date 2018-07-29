@@ -11,15 +11,17 @@ data = json.load(jsonFile)
 jsonFile.close()
 courses=[]
 for key in data:
-    courses.append(key)
-
+    string =""
+    string = data[key]["id"] + " : " + data[key]["name"]
+    courses.append(string)
+print(courses)
 @app.route('/', methods = ['GET','POST'])
 def home():
     if request.method == "POST":
         code = request.form.get('getCode')
         code = code.upper()
         code = "".join(code.split())
-
+        code = code[:7]
         Grades = SearchGrades(code)
         numberRecords = len (Grades)
         
