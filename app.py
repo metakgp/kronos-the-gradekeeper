@@ -14,7 +14,7 @@ for key in data:
     string =""
     string = data[key]["id"] + " : " + data[key]["name"]
     courses.append(string)
-print(courses)
+#print(courses)
 @app.route('/', methods = ['GET','POST'])
 def home():
     if request.method == "POST":
