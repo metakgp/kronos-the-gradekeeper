@@ -75,20 +75,20 @@ def GeneratePlots(x_groups,x,y_values,semester) :
         
         plt.bar(x,y_values)
         plt.title(semester)
-        
+
         plt.ylabel('No of students')
         plt.xticks(x, x_groups)
-        
+
         for i in range(0,7):
             if(y_values[i]>0):
                 plt.text ( x = i-0.3, y = y_values[i]+0.005, s = y_values[i], size = 12)
-        
+
         plt.savefig('Grades/Temp_files/%s.png' % semester)
         plt.close()
-        
+
 
 def MakeGraphs(val, code) :
-    
+
     number_courses = 0
     total_grades = [0] * 7 #This variable stores sum of grades corresponding to EX, A, B, C, D, P, F
 
@@ -96,23 +96,23 @@ def MakeGraphs(val, code) :
     for semester, grades in val.items():
         x = range(7)
         y_values = [grades['EX'],grades['A'],grades['B'],grades['C'],grades['D'],grades['P'],grades['F']]
-        
+
         for i in range(7):
             total_grades[i] = total_grades[i] + y_values[i]
 
         GeneratePlots(x_groups,x,y_values,semester)
         number_courses = number_courses+1
-    
+
     avg_grades = [0.0] * 7
 
     for i in range(7):
         avg_grades[i] = float(total_grades[i])/number_courses
-    
+
     if(number_courses>1):
         GeneratePlots(x_groups,x,avg_grades,'HistoricalAverage')
         DrawLineHistorical()
     RemovePreviousStitichedImage()
-    
+
     CombineImage(val, code, number_courses)
     #print ("Makegraph_end")
 

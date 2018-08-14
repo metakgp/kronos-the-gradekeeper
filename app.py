@@ -15,6 +15,7 @@ for key in data:
     string = data[key]["id"] + " : " + data[key]["name"]
     courses.append(string)
 #print(courses)
+Grades = {}
 @app.route('/', methods = ['GET','POST'])
 def home():
     if request.method == "POST":
@@ -28,22 +29,23 @@ def home():
         if( Grades == 'NA'):
 
             if len (code) == 7 and code[:2].isalpha() and code[-5:].isdigit() :
-                return render_template('kronos.html',courseCode = code, numberRecords = numberRecords,result = "no-data", courses = courses)
+                return render_template('kronos.html',courseCode = code, Grades = Grades, result = "no-data", courses = courses)
             else:
-                return render_template('kronos.html',courseCode = code, numberRecords = numberRecords,result = "invalid-code", courses = courses)
+                return render_template('kronos.html',courseCode = code, Grades = Grades, result = "invalid-code", courses = courses)
         
         else:
-            MakeGraphs(Grades,code)
-            return render_template('kronos.html',courseCode = code, numberRecords = numberRecords,result = "show-grades",courses = courses)
+            #MakeGraphs(Grades,code)
+            return render_template('kronos.html',courseCode = code, Grades = Grades, result = "show-grades",courses = courses)
 
     else:
         code ="skf"
-        return render_template('kronos.html',courseCode = '', numberRecords = '',result = "",courses = courses)
+        Grades = {}
+        return render_template('kronos.html',courseCode = '', Grades = Grades, result = "",courses = courses)
 
 
-@app.route('/figure/<filename>')
-def figure(filename):
-    return send_from_directory('figure', filename)
+#@app.route('/figure/<filename>')
+#def figure(filename):
+#   return send_from_directory('figure', filename)
 
 
 if __name__=="__main__" :
