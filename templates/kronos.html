@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset = "UTF-8">
-        <title>Kronos/{{courseCode}}</title>
+        <title>{{courseCode}}/Kronos</title>
         <link 
         rel="stylesheet" 
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" 
@@ -12,6 +12,7 @@
         <link rel = "stylesheet" type = "text/css" href = "{{url_for('static', filename = 'style.css')}}">
     </head>
     <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
         <div class="jumbotron">
             <h1>Kronos</h1>
         </div>
@@ -46,8 +47,8 @@
                         </div>
                     </div>
                     <div id="show-grades" style="visibility:hidden">
-                        <h1>{{numberRecords}} record(s) found for {{courseCode}}</h1>
-                        <img src = "{{ url_for('figure',filename = courseCode + '.jpg') }}" id = "graph">
+
+                        <canvas id = "line-chart" width="600" height="300"></canvas>
                     </div>
                     <div id="invalid-code" style="visibility:hidden">
                         <h1>INVALID CODE!</h1>
@@ -57,6 +58,7 @@
                     </div>
                 </form>
         </div>
+
         <script>
         function hide_blocks(display_id){
             var x = document.getElementById(display_id);
@@ -80,7 +82,137 @@
                     show_blocks(display_id);
                 }
         </script>
-        <!--<script type="text/javascript" src="{{ url_for('static', filename='scriptjs.js') }}"></script>
-        -->
+
+        <!--FOR CHART-->
+        <script>
+                    window.chartColors = [
+                "#00ffff",
+                "#f0ffff",
+                "#f5f5dc",
+                "#000000",
+                "#0000ff",
+                "#a52a2a",
+                "#00ffff",
+                "#00008b",
+                "#008b8b",
+                "#a9a9a9",
+                "#006400",
+                "#bdb76b",
+                "#8b008b",
+                "#556b2f",
+                "#ff8c00",
+                "#9932cc",
+                "#8b0000",
+                "#e9967a",
+                "#9400d3",
+                "#ff00ff",
+                "#ffd700",
+                "#008000",
+                "#4b0082",
+                "#f0e68c",
+                "#add8e6",
+                "#e0ffff",
+                "#90ee90",
+                "#d3d3d3",
+                "#ffb6c1",
+                "#ffffe0",
+                "#00ff00",
+                "#ff00ff",
+                "#800000",
+                "#000080",
+                "#808000",
+                "#ffa500",
+                "#ffc0cb",
+                "#800080",
+                "#800080",
+                "#ff0000",
+                "#c0c0c0",
+                "#ffff00"
+            ];
+
+            var gradesdist = {{Grades|safe}};
+            var chart_grades_data = [];
+
+            for (x in gradesdist)
+            {
+                this_sem = {};
+                this_sem ["label"] = x;
+                this_sem ["fill"] = false;
+                var index = Math.floor((Math.random() * 43))
+                this_sem ["borderColor"] = window.chartColors[index];
+                
+                grades_ordered = [];
+                grades_ordered.push(gradesdist[x]["EX"]);
+                grades_ordered.push(gradesdist[x]["A"]);
+                grades_ordered.push(gradesdist[x]["B"]);
+                grades_ordered.push(gradesdist[x]["C"]);
+                grades_ordered.push(gradesdist[x]["D"]);
+                grades_ordered.push(gradesdist[x]["P"]);
+                grades_ordered.push(gradesdist[x]["F"]);
+                this_sem ["data"] = grades_ordered;
+
+                chart_grades_data.push(this_sem);   
+            }
+            
+            console.log(chart_grades_data);
+            var chart_data = {labels: ['EX','A','B','C','D','F','P']};
+            chart_data["data"] = chart_grades_data;
+    
+            new Chart(document.getElementById("line-chart"), {
+                type: 'line',
+                data: {
+                    labels: ['EX','A','B','C','D','F','P'],
+                    datasets: chart_grades_data
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: '{{courseCode}}',
+                        fontSize: 20,
+                        fontColor: 'black',
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Grade',
+                                fontColor: 'black'
+                            },
+                            ticks: {
+                                fontColor: 'black'
+                            },
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'No. of students',
+                                fontColor: 'black'
+                            },
+                            ticks: {
+                                fontColor: 'black'
+                            },
+
+                        }]
+                    },
+                    legend: {
+                        labels: {
+                            fontColor: 'black'
+                        }
+                    }
+                }
+            });
+            console.log(document.getElementById("line-chart"));
+        </script>
     </body>
 </html>
