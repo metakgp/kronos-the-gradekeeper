@@ -65,6 +65,6 @@ This has two steps:
   
 ## Maintainer
 
-[Ayush Kaushal](https://github.com/ayushkaushal) and @Ayushkaushal on metakgp Slack.
+[Ayush Kaushal](https://github.com/ayushkaushal) (@Ayushkaushal on [metakgp Slack](https://slack.metakgp.org).)
   
   
