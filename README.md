@@ -63,3 +63,8 @@ This has two steps:
   The command line argument string passed should have both Year and semester for which the grades are being displayed on erp.
   Example : If you update grades at the end of spring 2019, then pass the argument as 2019Spring or prefereably something similar covering same information.
   
+## Maintainer
+
+[Ayush Kaushal](https://github.com/ayushkaushal) and @Ayushkaushal on metakgp Slack.
+  
+  
