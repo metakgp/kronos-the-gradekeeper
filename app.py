@@ -2,7 +2,7 @@ from flask import Flask, request,render_template, url_for, redirect, send_file, 
 import string
 import json
 from SearchGrades import SearchGrades
-from MakeGraphs import MakeGraphs
+
 
 app = Flask(__name__)
 numberRecords=0
