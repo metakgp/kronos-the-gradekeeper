@@ -14,8 +14,9 @@ for key in data:
     string =""
     string = data[key]["id"] + " : " + data[key]["name"]
     courses.append(string)
-#print(courses)
+
 Grades = {}
+
 @app.route('/', methods = ['GET','POST'])
 def home():
     if request.method == "POST":
@@ -34,13 +35,11 @@ def home():
                 return render_template('kronos.html',courseCode = code, Grades = Grades, result = "invalid-code", courses = courses)
         
         else:
-            #MakeGraphs(Grades,code)
             return render_template('kronos.html',courseCode = code, Grades = Grades, result = "show-grades",courses = courses)
 
     else:
-        code ="skf"
         Grades = {}
-        return render_template('kronos.html',courseCode = '', Grades = Grades, result = "",courses = courses)
+        return render_template('kronos.html',courseCode = '', Grades = Grades, result = "on-start",courses = courses)
 
 
 #@app.route('/figure/<filename>')
