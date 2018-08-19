@@ -3,7 +3,8 @@
 <html>
     <head>
         <meta charset = "UTF-8">
-        <title>{{courseCode}}/Kronos</title>
+        <link rel="shortcut icon" href="{{url_for('static', filename = 'favicon.ico')}}" />
+        <title>Kronos</title>
         <link 
         rel="stylesheet" 
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" 
@@ -126,9 +127,19 @@
 
             var gradesdist = {{Grades|safe}};
             var chart_grades_data = [];
+            var dataset = [];
 
             for (x in gradesdist)
-            {
+            {   
+                dataset.push(x);
+            }
+            dataset.sort();
+            dataset.reverse();
+
+            for (var i =0; i<dataset.length; i++)
+            {   
+                var x =  dataset[i];
+
                 this_sem = {};
                 this_sem ["label"] = x;
                 this_sem ["fill"] = false;
@@ -147,7 +158,6 @@
 
                 chart_grades_data.push(this_sem);   
             }
-            
             var chart_data = {labels: ['EX','A','B','C','D','F','P']};
             chart_data["data"] = chart_grades_data;
     
