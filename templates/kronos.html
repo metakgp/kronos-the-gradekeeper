@@ -13,74 +13,68 @@
     </head>
     <body>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-        <div class="jumbotron">
-            <h1>Kronos</h1>
+        <div style = "text-align:center; margin-left:auto; margin-right:auto; ">
+            <h1 style="display:inline; color: black; text-align:center; position: relative; left: -100px;">Kronos - the gradekeeper</h1> 
         </div>
         <div class="container">                
-                <form class="form-horizontal" method="POST" autocomplete="off">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-3"></div>
-                            <label class="control-label col-sm-8" for="email">You are just a click away!</label>
-                            <div class="col-sm-1"></div>
-                        </div>
-                        <div class="col-sm-10">
-                        <input 
-                        type = "text"  
-                        id = "query" 
-                        class="form-control" 
-                        placeholder = "Enter course code here" 
-                        name = "getCode"
-                        list="courses_valid"
-                        >
-                        <datalist id ="courses_valid">
-                            {% for c in courses %}
-                                <option value="{{c}}"></option>
+            <form class="form-horizontal" method="POST" autocomplete="off">
+                <div class="form-group">
+                    <div class="col-sm-10">
+                    <input 
+                    type = "text"  
+                    id = "query" 
+                    class="form-control" 
+                    placeholder = "Enter course code here" 
+                    name = "getCode"
+                    list="courses_valid"
+                    >
+                    <datalist id ="courses_valid">
+                        {% for c in courses %}
+                            <option value="{{c}}"></option>
 
-                            {% endfor %}
-                        </datalist>
-                      </div>
+                        {% endfor %}
+                    </datalist>
                     </div>
-                    <div class="form-group"> 
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <input type = "submit" class="btn btn-primary btn-block" name = "search" id = "submit_button" onclick="myFunction({{result}})">
-                        </div>
+                </div>
+                <div class="form-group"> 
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type = "submit" class="btn btn-primary btn-block" name = "search" id = "submit_button" onclick="myFunction({{result}})">
                     </div>
-                    <div id="show-grades" style="visibility:hidden">
+                </div>
 
-                        <canvas id = "line-chart" width="600" height="300"></canvas>
-                    </div>
-                    <div id="invalid-code" style="visibility:hidden">
-                        <h1>INVALID CODE!</h1>
-                    </div>
-                    <div id="no-data" style="visibility:hidden">
-                        <h1>Sorry, no data available for that coursecode</h1>
-                    </div>
-                </form>
+                <div id="show-grades" style="visibility:hidden">
+                    <canvas id = "line-chart" width="600" height="300"></canvas>
+                </div>
+                <div id="invalid-code" style="position: relative; left: 300px; visibility:hidden">
+                    <h1>INVALID CODE!</h1>
+                </div>
+                <div id="no-data" style="position: relative; left: 50px; visibility:hidden">
+                    <h1>Sorry, no data available for that coursecode</h1>
+                </div>
+
+            </form>
+        </div>
+
+        <div style = " bottom: 0; margin-left: auto; margin-left: right; text-align: center; color : rgb(5, 3, 97) !important; position: relative; left: -100px;">
+            This project was developed under <a href="https://metakgp.github.io/"><u>metakgp</u></a>, to see more projects like this <a href="https://github.com/metakgp"><u>click here</u></a>
         </div>
 
         <script>
-        function hide_blocks(display_id){
-            var x = document.getElementById(display_id);
-            x.style.visibility = "visible";
-            x.style.display = "none";
-        }
-        function show_blocks(display_id){
-            var x = document.getElementById(display_id);
-            x.style.visibility = "visible";
-            x.style.display = "block";
-        }
-        display_id= "{{result}}"; 
+            /*function hide_blocks(display_id){
+                var x = document.getElementById(display_id);
+                x.style.visibility = "visible";
+                x.style.display = "none";
+            }
+            */
+            function show_blocks(display_id){
+                var x = document.getElementById(display_id);
+                x.style.visibility = "visible";
+                x.style.display = "block";
+            }
+            display_id = "{{result}}"; 
 
-        if(display_id=="show-grades") {
             show_blocks(display_id);
-        }
-        else    if(display_id=="invalid-code") {
-                    show_blocks(display_id);
-                }
-        else    if(display_id=="no-data") {
-                    show_blocks(display_id);
-                }
+
         </script>
 
         <!--FOR CHART-->
@@ -154,14 +148,13 @@
                 chart_grades_data.push(this_sem);   
             }
             
-            console.log(chart_grades_data);
             var chart_data = {labels: ['EX','A','B','C','D','F','P']};
             chart_data["data"] = chart_grades_data;
     
             new Chart(document.getElementById("line-chart"), {
                 type: 'line',
                 data: {
-                    labels: ['EX','A','B','C','D','F','P'],
+                    labels: ['EX','A','B','C','D','P','F'],
                     datasets: chart_grades_data
                 },
                 options: {
@@ -185,11 +178,13 @@
                             display: true,
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Grade',
-                                fontColor: 'black'
+                                labelString: 'Grades',
+                                fontColor: 'black',
+                                fontSize: 20
                             },
                             ticks: {
-                                fontColor: 'black'
+                                fontColor: 'black',
+                                fontSize: 15
                             },
                         }],
                         yAxes: [{
@@ -197,22 +192,24 @@
                             scaleLabel: {
                                 display: true,
                                 labelString: 'No. of students',
-                                fontColor: 'black'
+                                fontColor: 'black',
+                                fontSize: 20
                             },
                             ticks: {
-                                fontColor: 'black'
+                                fontColor: 'black',
+                                fontSize: 15
                             },
 
                         }]
                     },
                     legend: {
                         labels: {
-                            fontColor: 'black'
+                            fontColor: 'black',
+                            fontSize: 20
                         }
                     }
                 }
             });
-            console.log(document.getElementById("line-chart"));
         </script>
     </body>
 </html>

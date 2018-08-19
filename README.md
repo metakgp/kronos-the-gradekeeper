@@ -28,7 +28,7 @@ Python packages required:
 
 
 ## Example
-![Example](https://github.com/Ayushkaushal/Grim_Reaper/blob/master/example.gif)
+![Example](https://github.com/Ayushkaushal/Grim_Reaper/blob/master/Kronos.gif)
 
 
 

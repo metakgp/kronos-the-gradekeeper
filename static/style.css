@@ -8,17 +8,10 @@ h1 {
     font-style: normal;
 }
 
-.jumbotron {
-    background: black !important;
-    width: 100%;
-    text-align: center;
-}
-
 .container {
     width: 100%;
     background: transparent;
 }
-
 
 #query {
     text-align: center;
