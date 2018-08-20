@@ -28,8 +28,7 @@ Python packages required:
 
 
 ## Example
-![Example](https://github.com/metakgp/Grim_Reaper/blob/master/Kronos.gif)
-
+![Example](https://github.com/metakgp/Kronos/blob/master/Kronos.gif)
 
 
 # Updating / Adding new grades from erp
