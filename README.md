@@ -1,7 +1,7 @@
 # Grim_Reaper
 
 
-This webapp displays previous year's grade distribution. Here the blood-curdling grade distribution reaps a part of your soul on every request you make.
+This webapp displays previous year's grade distribution. It has been deployed on heroku as an app and is funcitonal.
 
 ## Installation guide
 
@@ -28,7 +28,7 @@ Python packages required:
 
 
 ## Example
-![Example](https://github.com/Ayushkaushal/Grim_Reaper/blob/master/Kronos.gif)
+![Example](https://github.com/metakgp/Grim_Reaper/blob/master/Kronos.gif)
 
 
 
@@ -62,4 +62,9 @@ This has two steps:
   
   The command line argument string passed should have both Year and semester for which the grades are being displayed on erp.
   Example : If you update grades at the end of spring 2019, then pass the argument as 2019Spring or prefereably something similar covering same information.
+  
+## Maintainer
+
+[Ayush Kaushal](https://github.com/Ayushkaushal) (@Ayushkaushal on [metakgp Slack](https://slack.metakgp.org).)
+  
   
