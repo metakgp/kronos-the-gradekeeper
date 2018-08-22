@@ -3,41 +3,46 @@
 <html>
     <head>
         <meta charset = "UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <link rel="shortcut icon" href="{{url_for('static', filename = 'favicon.ico')}}" />
         <title>Kronos</title>
-        <link 
-        rel="stylesheet" 
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" 
-        integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" 
+        <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+        integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
         crossorigin="anonymous">
         <link rel = "stylesheet" type = "text/css" href = "{{url_for('static', filename = 'style.css')}}">
     </head>
+
     <body>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-        <div style = "text-align:center; margin-left:auto; margin-right:auto; ">
-            <h1 style="display:inline; color: black; text-align:center; position: relative; left: -100px;">Kronos - the gradekeeper</h1> 
+
+        <div id="header">
+            <h1>Kronos - the gradekeeper</h1>
         </div>
-        <div class="container">                
+
+        <div class="container">
             <form class="form-horizontal" method="POST" autocomplete="off">
                 <div class="form-group">
                     <div class="col-sm-10">
-                    <input 
-                    type = "text"  
-                    id = "query" 
-                    class="form-control" 
-                    placeholder = "Enter course code here" 
-                    name = "getCode"
-                    list="courses_valid"
-                    >
-                    <datalist id ="courses_valid">
-                        {% for c in courses %}
-                            <option value="{{c}}"></option>
-
-                        {% endfor %}
-                    </datalist>
+                        <input
+                            type = "text"
+                            id = "query"
+                            class="form-control"
+                            placeholder = "Enter course code here"
+                            name = "getCode"
+                            list="courses_valid"
+                        >
+                        <datalist id ="courses_valid">
+                            {% for c in courses %}
+                                <option value="{{c}}"></option>
+                            {% endfor %}
+                        </datalist>
                     </div>
                 </div>
-                <div class="form-group"> 
+                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <input type = "submit" class="btn btn-primary btn-block" name = "search" id = "submit_button" onclick="myFunction({{result}})">
                     </div>
@@ -56,7 +61,7 @@
             </form>
         </div>
 
-        <div style = " bottom: 0; margin-left: auto; margin-left: right; text-align: center; color : rgb(5, 3, 97) !important; position: relative; left: -100px;">
+        <div id="footer">
             This project was developed under <a href="https://metakgp.github.io/"><u>metakgp</u></a>, to see more projects like this <a href="https://github.com/metakgp"><u>click here</u></a>
         </div>
 
@@ -72,7 +77,7 @@
                 x.style.visibility = "visible";
                 x.style.display = "block";
             }
-            display_id = "{{result}}"; 
+            display_id = "{{result}}";
 
             show_blocks(display_id);
 
@@ -130,14 +135,14 @@
             var dataset = [];
 
             for (x in gradesdist)
-            {   
+            {
                 dataset.push(x);
             }
             dataset.sort();
             dataset.reverse();
 
             for (var i =0; i<dataset.length; i++)
-            {   
+            {
                 var x =  dataset[i];
 
                 this_sem = {};
@@ -145,7 +150,7 @@
                 this_sem ["fill"] = false;
                 var index = Math.floor((Math.random() * 43))
                 this_sem ["borderColor"] = window.chartColors[index];
-                
+
                 grades_ordered = [];
                 grades_ordered.push(gradesdist[x]["EX"]);
                 grades_ordered.push(gradesdist[x]["A"]);
@@ -156,11 +161,11 @@
                 grades_ordered.push(gradesdist[x]["F"]);
                 this_sem ["data"] = grades_ordered;
 
-                chart_grades_data.push(this_sem);   
+                chart_grades_data.push(this_sem);
             }
             var chart_data = {labels: ['EX','A','B','C','D','F','P']};
             chart_data["data"] = chart_grades_data;
-    
+
             new Chart(document.getElementById("line-chart"), {
                 type: 'line',
                 data: {
