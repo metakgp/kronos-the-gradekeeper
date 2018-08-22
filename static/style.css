@@ -1,6 +1,7 @@
 body{
     /* margin: auto; */
-    background: linear-gradient(to top right, lightseagreen, violet);
+    background: linear-gradient(to right, lightseagreen, violet);
+    min-height: 100%;
 }
 
 h1 {
@@ -49,6 +50,7 @@ form {
     box-shadow: 1px 1px 1px lightblue;
 }
 #header {
+    padding-top: 1em;
     text-align:center;
     margin-left:auto;
     margin-right:auto;
@@ -68,4 +70,18 @@ form {
 
 .col-sm-10 {
     max-width: none;
+}
+
+#show-grades {
+    visibility:hidden;
+}
+#invalid-code {
+    /* position: relative; */
+    left: 300px;
+    visibility:hidden;
+}
+#no-data {
+    /* position: relative; */
+    left: 50px;
+    visibility:hidden;
 }
