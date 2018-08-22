@@ -58,15 +58,12 @@ form {
     display:inline;
     color: black;
     text-align:center;
-    /* position: relative; */
-    /* left: -100px; */
 }
 
 #footer {
     bottom: 0;
     text-align: center;
     color : rgb(5, 3, 97);
-    position: relative;
 }
 
 .col-sm-10 {
