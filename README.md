@@ -3,6 +3,8 @@
 
 This webapp displays previous year's grade distribution. It has been deployed on heroku as an app and is funcitonal.
 
+You can go [here](https://kronos.metakgp.org) for the live version of the project.
+
 ## Installation guide
 
 Python packages required:
