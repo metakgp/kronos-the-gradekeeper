@@ -15,8 +15,7 @@
     </head>
 
     <body>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <div id="header">
             <h1>Kronos - the gradekeeper</h1>
         </div>
@@ -47,7 +46,7 @@
                 </div>
 
                 <div id="show-grades">
-                    <canvas id = "line-chart" width="600" height="300"></canvas>
+                    <div id = "final-graph"></div>
                 </div>
                 <div id="invalid-code">
                     <h1>INVALID CODE!</h1>
@@ -83,71 +82,35 @@
 
         <!--FOR CHART-->
         <script>
-                    window.chartColors = [
-                "#00ffff",
-                "#f0ffff",
-                "#f5f5dc",
-                "#000000",
-                "#0000ff",
-                "#a52a2a",
-                "#00ffff",
-                "#00008b",
-                "#008b8b",
-                "#a9a9a9",
-                "#006400",
-                "#bdb76b",
-                "#8b008b",
-                "#556b2f",
-                "#ff8c00",
-                "#9932cc",
-                "#8b0000",
-                "#e9967a",
-                "#9400d3",
-                "#ff00ff",
-                "#ffd700",
-                "#008000",
-                "#4b0082",
-                "#f0e68c",
-                "#add8e6",
-                "#e0ffff",
-                "#90ee90",
-                "#d3d3d3",
-                "#ffb6c1",
-                "#ffffe0",
-                "#00ff00",
-                "#ff00ff",
-                "#800000",
-                "#000080",
-                "#808000",
-                "#ffa500",
-                "#ffc0cb",
-                "#800080",
-                "#800080",
-                "#ff0000",
-                "#c0c0c0",
-                "#ffff00"
-            ];
-
             var gradesdist = {{Grades|safe}};
-            var chart_grades_data = [];
-            var dataset = [];
-
+            var sorted_keys = [];
+            var data = []; //final dataset
+            var possible_grades = ['EX','A','B','C','D','P','F'];
+            
             for (x in gradesdist)
             {
-                dataset.push(x);
+                sorted_keys.push(x);
             }
-            dataset.sort();
-            dataset.reverse();
-
-            for (var i =0; i<dataset.length; i++)
+            sorted_keys.sort();
+            sorted_keys.reverse();
+            for (var i =0; i<sorted_keys.length-1; i++) //Make Autumn appear above(latest) Spring
             {
-                var x =  dataset[i];
+                if( sorted_keys[i][3] == sorted_keys[i+1][3]) {
+                    if (sorted_keys[i][4] > sorted_keys[i+1][4])
+                    {
+                        var a = sorted_keys[i];
+                        sorted_keys[i] = sorted_keys[i+1];
+                        sorted_keys[i+1] = a;
+                    }
+                }
+            }
+
+            for (var i =0; i<sorted_keys.length; i++)
+            {
+                var x =  sorted_keys[i];
 
                 this_sem = {};
-                this_sem ["label"] = x;
-                this_sem ["fill"] = false;
-                var index = Math.floor((Math.random() * 43))
-                this_sem ["borderColor"] = window.chartColors[index];
+                this_sem ["name"] = x;
 
                 grades_ordered = [];
                 grades_ordered.push(gradesdist[x]["EX"]);
@@ -157,72 +120,21 @@
                 grades_ordered.push(gradesdist[x]["D"]);
                 grades_ordered.push(gradesdist[x]["P"]);
                 grades_ordered.push(gradesdist[x]["F"]);
-                this_sem ["data"] = grades_ordered;
-
-                chart_grades_data.push(this_sem);
+                this_sem ["y"] = grades_ordered;
+                this_sem ["x"] = possible_grades;
+                this_sem ["mode"] =  "lines+markers";
+                data.push(this_sem);
             }
-            var chart_data = {labels: ['EX','A','B','C','D','F','P']};
-            chart_data["data"] = chart_grades_data;
 
-            new Chart(document.getElementById("line-chart"), {
-                type: 'line',
-                data: {
-                    labels: ['EX','A','B','C','D','P','F'],
-                    datasets: chart_grades_data
-                },
-                options: {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: '{{courseCode}}',
-                        fontSize: 20,
-                        fontColor: 'black',
-                    },
-                    tooltips: {
-                        mode: 'index',
-                        intersect: false,
-                    },
-                    hover: {
-                        mode: 'nearest',
-                        intersect: true
-                    },
-                    scales: {
-                        xAxes: [{
-                            display: true,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Grades',
-                                fontColor: 'black',
-                                fontSize: 20
-                            },
-                            ticks: {
-                                fontColor: 'black',
-                                fontSize: 15
-                            },
-                        }],
-                        yAxes: [{
-                            display: true,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'No. of students',
-                                fontColor: 'black',
-                                fontSize: 20
-                            },
-                            ticks: {
-                                fontColor: 'black',
-                                fontSize: 15
-                            },
+            var layout = {
+                yaxis: {rangemode: 'tozero',
+                        showline: true,
+                        zeroline: true}
+            };
 
-                        }]
-                    },
-                    legend: {
-                        labels: {
-                            fontColor: 'black',
-                            fontSize: 20
-                        }
-                    }
-                }
-            });
+            Plotly.newPlot('final-graph', data, layout);
+
+
         </script>
     </body>
 </html>
