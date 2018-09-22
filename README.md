@@ -16,7 +16,6 @@ Python packages required:
 
 - Install matplotlib: `pip3 install matplotlib`
 
-- Install json: `pip3 install json`
 
 ## Running the app
 
@@ -36,8 +35,6 @@ Python packages required:
 # Updating / Adding new grades from erp
 
 ## Installation guide
-
-- Install json: `pip install json`
 
 - Install regex/re  : `pip install regex`
 
