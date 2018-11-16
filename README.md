@@ -1,4 +1,4 @@
-# Grim_Reaper
+# Kronos
 
 
 This webapp displays previous year's grade distribution. It has been deployed on heroku as an app and is funcitonal.
