@@ -2,11 +2,15 @@ body{
     /* margin: auto; */
     background: linear-gradient(to right, lightseagreen, violet);
     min-height: 100%;
+    background-image: url(reaper.jpg);
+    background-size: 100% 100%;
 }
 
 h1 {
     color: white;
-    font-style: normal;
+
+    text-align: center;
+
 }
 
 .container {
@@ -54,18 +58,22 @@ form {
     text-align:center;
     margin-left:auto;
     margin-right:auto;
+
 }
 
 #header > h1 {
     display:inline;
-    color: black;
+    color: white;
     text-align:center;
+    font-family: 'IM Fell French Canon SC';
+    font-weight: bold;
+    font-size: 50px;
 }
 
 #footer {
     bottom: 0;
     text-align: center;
-    color : rgb(5, 3, 97);
+    color : #d9d9d9;
 }
 
 .col-sm-10 {
