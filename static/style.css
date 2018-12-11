@@ -1,12 +1,17 @@
 body{
     /* margin: auto; */
-    background: linear-gradient(to right, lightseagreen, violet);
+    /*background: linear-gradient(to right, lightseagreen, violet);*/
+    background-image: url(Mini.jpg);
+    background-size: 100% 100%;
     min-height: 100%;
 }
 
 h1 {
     color: white;
     font-style: normal;
+    font-weight: bold;
+    /*font-family: ;*/
+    text-align: center;
 }
 
 .container {
