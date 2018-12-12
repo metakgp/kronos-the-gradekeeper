@@ -6,14 +6,20 @@ from SearchGrades import SearchGrades
 
 app = Flask(__name__)
 numberRecords=0
-jsonFile = open("courses.json", "r")
+jsonFile = open("Grades/yearWiseGrades.json", "r")
 data = json.load(jsonFile)
 jsonFile.close()
 courses=[]
-for key in data:
-    string =""
-    string = data[key]["id"] + " : " + data[key]["name"]
-    courses.append(string)
+with open("courses.json","r") as f:
+    courses_having_data = json.load(f)
+    for key in data:
+
+        string =""
+        try:
+            string = key + " : " + courses_having_data[key]["name"]
+        except:
+            string = key
+        courses.append(string)
 
 Grades = {}
 
