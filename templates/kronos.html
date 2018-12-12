@@ -124,8 +124,8 @@
                 grades_ordered.push(gradesdist[x]["B"]*100/total[i]);
                 grades_ordered.push(gradesdist[x]["C"]*100/total[i]);
                 grades_ordered.push(gradesdist[x]["D"]*100/total[i]);
-                grades_ordered.push(gradesdist[x]["P"]/total[i]);
-                grades_ordered.push(gradesdist[x]["F"]/total[i]);
+                grades_ordered.push(gradesdist[x]["P"]*100/total[i]);
+                grades_ordered.push(gradesdist[x]["F"]*100/total[i]);
                 this_sem ["y"] = grades_ordered;
                 this_sem ["x"] = possible_grades;
                 this_sem ["mode"] =  "lines+markers";
