@@ -46,46 +46,26 @@
                         <input type = "submit" class="btn btn-primary btn-block" name = "search" id = "submit_button" onclick="myFunction({{result}})">
                     </div>
                 </div>
-
+                {% if result=='show-grades' %}
                 <div id="show-grades">
                     <div id = "final-graph"></div>
                 </div>
+                {% elif result=='invalid-code' %}
                 <div id="invalid-code">
                     <h1>INVALID CODE!</h1>
                 </div>
+                {% else %}
                 <div id="no-data">
                     <h1>Sorry, no data available for that coursecode</h1>
                 </div>
-
+                {% endif %}
             </form>
         </div>
 
         <div id="footer">
-            This project was developed under <a href="https://metakgp.github.io/"><u>metakgp</u></a>, to see more projects like this <a href="https://github.com/metakgp"><u>click here</u></a>
+            Contribute to this project on <a href="https://github.com/metakgp"><u>Github</u></a> | Powered by <a href="https://metakgp.github.io/"><u>metakgp</u></a> with <span style="font-size:150%;color:red;">♥</span>
         </div>
 
-
-
-
-
-        
-        <script>
-            /*function hide_blocks(display_id){
-                var x = document.getElementById(display_id);
-                x.style.visibility = "visible";
-                x.style.display = "none";
-            }
-            */
-            function show_blocks(display_id){
-                var x = document.getElementById(display_id);
-                x.style.visibility = "visible";
-                x.style.display = "block";
-            }
-            display_id = "{{result}}";
-
-            show_blocks(display_id);
-
-        </script>
 
         <!--FOR CHART-->
         <script>

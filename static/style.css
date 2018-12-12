@@ -1,12 +1,14 @@
-body{
-    /* margin: auto; */
-    background: linear-gradient(to right, lightseagreen, violet);
-    min-height: 100%;
-}
+body{ 
+    background: #D3CCE3;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-size: 100% 100%
+} 
 
 h1 {
-    color: white;
+    color: black;
     font-style: normal;
+
 }
 
 .container {
@@ -72,16 +74,9 @@ form {
     max-width: none;
 }
 
-#show-grades {
-    visibility:hidden;
-}
 #invalid-code {
-    /* position: relative; */
     left: 300px;
-    visibility:hidden;
 }
 #no-data {
-    /* position: relative; */
     left: 50px;
-    visibility:hidden;
 }
