@@ -33,9 +33,11 @@
                             list="courses_valid"
                         >
                         <datalist id ="courses_valid">
+                            <select>
                             {% for c in courses %}
                                 <option value="{{c}}"></option>
                             {% endfor %}
+                            </select>
                         </datalist>
                     </div>
                 </div>
