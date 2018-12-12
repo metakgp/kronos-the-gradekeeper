@@ -1,4 +1,4 @@
-# Grim_Reaper
+# Kronos
 
 
 This webapp displays previous year's grade distribution. It has been deployed on heroku as an app and is funcitonal.
@@ -16,7 +16,6 @@ Python packages required:
 
 - Install matplotlib: `pip3 install matplotlib`
 
-- Install json: `pip3 install json`
 
 ## Running the app
 
@@ -36,8 +35,6 @@ Python packages required:
 # Updating / Adding new grades from erp
 
 ## Installation guide
-
-- Install json: `pip install json`
 
 - Install regex/re  : `pip install regex`
 
@@ -66,6 +63,6 @@ This has two steps:
   
 ## Maintainer
 
-[Ayush Kaushal](https://github.com/Ayushk4) (@Ayushkaushal on [metakgp Slack](https://slack.metakgp.org).)
+[Ayush Kaushal](https://github.com/Ayushk4) (@Ayushk4 on [metakgp Slack](https://slack.metakgp.org).)
   
   
