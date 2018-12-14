@@ -3,9 +3,9 @@
 <html>
     <head>
         <meta charset = "UTF-8">
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <meta name="description" content="A web based application to serve previous year grades distribution of IITKGP, IIT Kharagpur by metakgp">
+        <meta name="keywords" content="Kronos,Metakgp,Grades,Grade distribution,IIT Kharagpur,Kharagpur,IITKGP,KGP,Marks,Courses">
+        <meta name="author" content="Metakgp">
         <link rel="shortcut icon" href="{{url_for('static', filename = 'favicon.ico')}}" />
         <title>Kronos</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
@@ -15,8 +15,7 @@
     </head>
 
     <body>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <div id="header">
             <h1>Kronos - the gradekeeper</h1>
         </div>
@@ -47,183 +46,111 @@
                         <input type = "submit" class="btn btn-primary btn-block" name = "search" id = "submit_button" onclick="myFunction({{result}})">
                     </div>
                 </div>
-
+                {% if result=='show-grades' %}
                 <div id="show-grades">
-                    <canvas id = "line-chart" width="600" height="300"></canvas>
+                    <div id = "final-graph"></div>
                 </div>
+                {% elif result=='invalid-code' %}
                 <div id="invalid-code">
                     <h1>INVALID CODE!</h1>
                 </div>
+                {% elif  result=='no-data'%}
                 <div id="no-data">
                     <h1>Sorry, no data available for that coursecode</h1>
                 </div>
 
+                {% endif %}
             </form>
         </div>
 
         <div id="footer">
-            This project was developed under <a href="https://metakgp.github.io/"><u>metakgp</u></a>, to see more projects like this <a href="https://github.com/metakgp"><u>click here</u></a>
+            Contribute to this project on <a href="https://github.com/metakgp"><u>Github</u></a> | Powered by <a href="https://metakgp.github.io/"><u>metakgp</u></a> with <span style="font-size:150%;color:red;">♥</span>
         </div>
 
-        <script>
-            /*function hide_blocks(display_id){
-                var x = document.getElementById(display_id);
-                x.style.visibility = "visible";
-                x.style.display = "none";
-            }
-            */
-            function show_blocks(display_id){
-                var x = document.getElementById(display_id);
-                x.style.visibility = "visible";
-                x.style.display = "block";
-            }
-            display_id = "{{result}}";
-
-            show_blocks(display_id);
-
-        </script>
 
         <!--FOR CHART-->
         <script>
-                    window.chartColors = [
-                "#f0ffff",
-                "#f5f5dc",
-                "#000000",
-                "#a52a2a",
-                "#a9a9a9",
-                "#006400",
-                "#bdb76b",
-                "#556b2f",
-                "#ff8c00",
-                "#e9967a",
-                "#ffd700",
-                "#008000",
-                "#ffff00",
-                "#f0e68c",
-                "#add8e6",
-                "#e0ffff",
-                "#90ee90",
-                "#d3d3d3",
-                "#ffb6c1",
-                "#ffffe0",
-                "#00ff00",
-                "#fe642e",
-                "#800000",
-                "#000080",
-                "#808000",
-                "#ffa500",
-                "#ffc0cb",
-                "#00ff00",
-                "#61380b",
-                "#ff0000",
-                "#c0c0c0",
-                "#ffff00",
-                "#424242",
-                "#2a0a0a",
-                "#173b0b",
-                "#2a120a",
-                "#088a29",
-                "#0a122a",
-                "#5E610b",
-                "#0a2a1b",
-                "#f2f5a9"
-            ];
-
             var gradesdist = {{Grades|safe}};
-            var chart_grades_data = [];
-            var dataset = [];
-
+            var sorted_keys = [];
+            var data = []; //final dataset
+            var possible_grades = ['EX','A','B','C','D','P','F'];
+            var grades_percent = [];
+            var total = [];
+            
             for (x in gradesdist)
             {
-                dataset.push(x);
+                sorted_keys.push(x);
             }
-            dataset.sort();
-            dataset.reverse();
 
-            for (var i =0; i<dataset.length; i++)
+            sorted_keys.sort();
+            sorted_keys.reverse();
+            //Make Autumn appear above(latest) Spring
+            for (var i =0; i<sorted_keys.length-1; i++) 
             {
-                var x =  dataset[i];
-
-                this_sem = {};
-                this_sem ["label"] = x;
-                this_sem ["fill"] = false;
-                var index = Math.floor((Math.random() * 43))
-                this_sem ["borderColor"] = window.chartColors[index];
-
-                grades_ordered = [];
-                grades_ordered.push(gradesdist[x]["EX"]);
-                grades_ordered.push(gradesdist[x]["A"]);
-                grades_ordered.push(gradesdist[x]["B"]);
-                grades_ordered.push(gradesdist[x]["C"]);
-                grades_ordered.push(gradesdist[x]["D"]);
-                grades_ordered.push(gradesdist[x]["P"]);
-                grades_ordered.push(gradesdist[x]["F"]);
-                this_sem ["data"] = grades_ordered;
-
-                chart_grades_data.push(this_sem);
-            }
-            var chart_data = {labels: ['EX','A','B','C','D','F','P']};
-            chart_data["data"] = chart_grades_data;
-
-            new Chart(document.getElementById("line-chart"), {
-                type: 'line',
-                data: {
-                    labels: ['EX','A','B','C','D','P','F'],
-                    datasets: chart_grades_data
-                },
-                options: {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: '{{courseCode}}',
-                        fontSize: 20,
-                        fontColor: 'black',
-                    },
-                    tooltips: {
-                        mode: 'index',
-                        intersect: false,
-                    },
-                    hover: {
-                        mode: 'nearest',
-                        intersect: true
-                    },
-                    scales: {
-                        xAxes: [{
-                            display: true,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Grades',
-                                fontColor: 'black',
-                                fontSize: 20
-                            },
-                            ticks: {
-                                fontColor: 'black',
-                                fontSize: 15
-                            },
-                        }],
-                        yAxes: [{
-                            display: true,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'No. of students',
-                                fontColor: 'black',
-                                fontSize: 20
-                            },
-                            ticks: {
-                                fontColor: 'black',
-                                fontSize: 15
-                            },
-
-                        }]
-                    },
-                    legend: {
-                        labels: {
-                            fontColor: 'black',
-                            fontSize: 20
-                        }
+                if( sorted_keys[i][3] == sorted_keys[i+1][3]) {
+                    if (sorted_keys[i][4] > sorted_keys[i+1][4])
+                    {
+                        var a = sorted_keys[i];
+                        sorted_keys[i] = sorted_keys[i+1];
+                        sorted_keys[i+1] = a;
                     }
                 }
-            });
+            }
+
+            for (var i =0; i<sorted_keys.length; i++)
+            {
+                var x =  sorted_keys[i];
+                var this_total = 0;
+                this_total += gradesdist[x]["EX"];
+                this_total += gradesdist[x]["A"];
+                this_total += gradesdist[x]["B"];
+                this_total += gradesdist[x]["C"];
+                this_total += gradesdist[x]["D"];
+                this_total += gradesdist[x]["P"];
+                this_total += gradesdist[x]["F"];
+
+                total[i] = this_total;
+            }
+            for (var i =0; i<sorted_keys.length; i++)
+            {
+                var x =  sorted_keys[i];
+
+                this_sem = {};
+                this_sem ["name"] = x;
+
+                grades_ordered = [];
+                grades_ordered.push(gradesdist[x]["EX"]*100/total[i]);
+                grades_ordered.push(gradesdist[x]["A"]*100/total[i]);
+                grades_ordered.push(gradesdist[x]["B"]*100/total[i]);
+                grades_ordered.push(gradesdist[x]["C"]*100/total[i]);
+                grades_ordered.push(gradesdist[x]["D"]*100/total[i]);
+                grades_ordered.push(gradesdist[x]["P"]*100/total[i]);
+                grades_ordered.push(gradesdist[x]["F"]*100/total[i]);
+                this_sem ["y"] = grades_ordered;
+                this_sem ["x"] = possible_grades;
+                this_sem ["mode"] =  "lines+markers";
+                data.push(this_sem);
+            }
+            console.log("sfsafas")
+            var layout = {
+                title: 'Grade-Distributions',
+                titlefont: {
+                    family: 'Courier New, monospace',
+                },
+                xaxis: {
+                    title: 'Grades'
+                },
+                yaxis: {
+                    title: 'Percentage of students (%)',
+                    rangemode: 'tozero',
+                    showline: true,
+                    zeroline: true
+                }
+            };
+
+            Plotly.newPlot('final-graph', data, layout);
+
+
         </script>
     </body>
 </html>

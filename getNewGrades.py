@@ -9,7 +9,7 @@ import sys
 sys.path.insert(0, 'Grades/')
 from AddGradesYearly import read_file
 
-cookie = '55D59CE3CB8F854B04F5984CA56BA4CD.worker2'
+cookie = '092F0250D00A42ADEB77AB5F5ACCC0BD.worker2'
 NUM_THREADS = 1
 
 def load(file):
@@ -50,7 +50,7 @@ n = 0
 
 def main():
     newGrades = {}
-    allcourses = load('courses.json').keys()
+    allcourses = load('breadth_course.json').keys()
     
     class ScrapingThread(threading.Thread): 
         def __init__(self,courses):
