@@ -28,6 +28,23 @@ def home():
     if request.method == "POST":
         code = request.form.get('getCode')
         code = code.upper()
+        #Extratcing name of course for wiki links
+        c2=code
+        #To extract Name of Course
+        c3=c2.split(":")
+        c3=c3[1]
+        c3=c3[1:]
+        c4=c3
+        #Forming a string which can be used as a link
+        string=""
+        for i in range(0,len(c3)):
+            if(i==0):
+                string=string+"_"+c3[i]
+            elif(c3[i]==" "):
+                string=string+"_"+c3[i+1]
+            elif(c3[i-1]!=" "):
+                string=string+c3[i].lower()
+        c3=string
         code = "".join(code.split())
         code = code[:7]
         Grades = SearchGrades(code)
@@ -41,7 +58,7 @@ def home():
                 return render_template('kronos.html',courseCode = code, Grades = Grades, result = "invalid-code", courses = courses)
         
         else:
-            return render_template('kronos.html',courseCode = code, Grades = Grades, result = "show-grades",courses = courses)
+            return render_template('kronos.html',courseCode = code, Grades = Grades, result = "show-grades",courses = courses,c1=c3,c5=c4)
 
     else:
         Grades = {}
