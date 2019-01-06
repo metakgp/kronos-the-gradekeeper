@@ -31,18 +31,18 @@ def home():
         #Extratcing name of course for wiki links
         Course_info=code
         #To extract Name of Course
-        Course_info=Course_info.split(":")[1][1:]
-        CourseName=Course_info
+        Course_info = Course_info.split(":")[1][1:]
+        CourseName = Course_info
         #Forming a string which can be used as a link
-        course_info_wiki_link=""
+        course_info_wiki_link = ""
         for i in range(0,len(Course_info)):
-            if(i==0):
-                course_info_wiki_link=course_info_wiki_link+"_"+Course_info[i]
-            elif(Course_info[i]==" "):
-                course_info_wiki_link=course_info_wiki_link+"_"+Course_info[i+1]
-            elif(Course_info[i-1]!=" "):
+            if(i == 0):
+                course_info_wiki_link = course_info_wiki_link + "_"+ Course_info[i]
+            elif(Course_info[i] == " "):
+                course_info_wiki_link = course_info_wiki_link + "_" + Course_info[i+1]
+            elif(Course_info[i-1] != " "):
                 course_info_wiki_link=course_info_wiki_link+Course_info[i].lower()
-        Course_info=course_info_wiki_link
+        Course_info = course_info_wiki_link
         code = "".join(code.split())
         code = code[:7]
         Grades = SearchGrades(code)
