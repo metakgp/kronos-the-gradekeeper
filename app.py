@@ -2,7 +2,9 @@ from flask import Flask, request,render_template, url_for, redirect, send_file, 
 import string
 import json
 from SearchGrades import SearchGrades
-
+from bs4 import BeautifulSoup
+import requests 
+import re
 
 app = Flask(__name__)
 numberRecords=0
@@ -33,18 +35,29 @@ def home():
         #To extract Name of Course
         Course_info = Course_info.split(":")[1][1:]
         CourseName = Course_info
-        #Forming a string which can be used as a link
-        course_info_wiki_link = ""
-        for i in range(0,len(Course_info)):
-            if(i == 0):
-                course_info_wiki_link = course_info_wiki_link + "_"+ Course_info[i]
-            elif(Course_info[i] == " "):
-                course_info_wiki_link = course_info_wiki_link + "_" + Course_info[i+1]
-            elif(Course_info[i-1] != " "):
-                course_info_wiki_link=course_info_wiki_link+Course_info[i].lower()
-        Course_info = course_info_wiki_link
         code = "".join(code.split())
         code = code[:7]
+        #To Extract Course Wiki links
+        Courselink = ""
+        courseFile = requests.get("https://wiki.metakgp.org/index.php?title=Category:Courses")
+        soup=BeautifulSoup(courseFile.text,'html.parser')
+        coursecodes = []
+        pattern="[A-Z][A-Z][0-9][0-9][0-9][0-9][0-9]"
+        for a in soup.find_all('a',href = True):
+            if(re.search(pattern,a['href'][3:10])):
+                coursecodes.append(a['href'])
+        for i in range(2,201):
+            for a in soup.find_all('a',href = True,text = 'next page'):
+                nextpagelink = a['href']
+                courseFile=requests.get("https://wiki.metakgp.org"+nextpagelink)
+                soup=BeautifulSoup(courseFile.text,'html.parser')
+                pattern="[A-Z][A-Z][0-9][0-9][0-9][0-9][0-9]"
+            for a in soup.find_all('a',href = True):
+                if(re.search(pattern,a['href'][3:10])):
+                    coursecodes.append(a['href'])
+        for i in range(len(coursecodes)):
+            if(code == coursecodes[i][3:10]):
+                Courselink = "https://wiki.metakgp.org"+ coursecodes[i]
         Grades = SearchGrades(code)
         numberRecords = len (Grades)
         
@@ -56,7 +69,7 @@ def home():
                 return render_template('kronos.html',courseCode = code, Grades = Grades, result = "invalid-code", courses = courses)
         
         else:
-            return render_template('kronos.html',courseCode = code, Grades = Grades, result = "show-grades",courses = courses,Cwikilink=Course_info,CoursN=CourseName)
+            return render_template('kronos.html',courseCode = code, Grades = Grades, result = "show-grades",courses = courses, Cwikilink = Courselink, CoursN = CourseName)
 
     else:
         Grades = {}
