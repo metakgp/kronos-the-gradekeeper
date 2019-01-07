@@ -30,11 +30,6 @@ def home():
     if request.method == "POST":
         code = request.form.get('getCode')
         code = code.upper()
-        #Extratcing name of course for wiki links
-        Course_info=code
-        #To extract Name of Course
-        Course_info = Course_info.split(":")[1][1:]
-        CourseName = Course_info
         code = "".join(code.split())
         code = code[:7]
         #To Extract Course Wiki links
@@ -69,7 +64,7 @@ def home():
                 return render_template('kronos.html',courseCode = code, Grades = Grades, result = "invalid-code", courses = courses)
         
         else:
-            return render_template('kronos.html',courseCode = code, Grades = Grades, result = "show-grades",courses = courses, Cwikilink = Courselink, CoursN = CourseName)
+            return render_template('kronos.html',courseCode = code, Grades = Grades, result = "show-grades",courses = courses, Cwikilink = Courselink)
 
     else:
         Grades = {}
