@@ -151,7 +151,11 @@
             };
 
             Plotly.newPlot('final-graph', data, layout);
-
+            
+            if('{{Cwikilink}}' == "")
+            {
+                $("#Courselink").fadeOut(1);
+            }
 
         </script>
     </body>
