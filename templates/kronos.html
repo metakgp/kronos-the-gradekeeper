@@ -49,11 +49,12 @@
                 </div>
                 {% if result=='show-grades' %}
                 <div id="show-grades">
-                    <p><center>
-                    <button id="Percentage" class="btn btn-info" type='button'>In Percentage</button>
-                    <button id="Student" class="btn btn-info" type='button'>In Number of students</button>
-                   </center> </p>
                     <div id = "final-graph"></div>
+                    <p><center>
+                    <button id="Percentage" class="btn btn-info" type='button'>Show graph w.r.t Percentage of Students</button>
+                    <button id="Student" class="btn btn-info" type='button'> Show graph w.r.t Number of Students</button>
+                     </center>
+                    </p>
                 </div>
                 {% elif result=='invalid-code' %}
                 <div id="invalid-code">
