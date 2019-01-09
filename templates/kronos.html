@@ -49,10 +49,10 @@
                 </div>
                 {% if result=='show-grades' %}
                 <div id="show-grades">
-                    <p>
+                    <p><center>
                     <button id="Percentage" class="btn btn-info" type='button'>In Percentage</button>
                     <button id="Student" class="btn btn-info" type='button'>In Number of students</button>
-                    </p>
+                   </center> </p>
                     <div id = "final-graph"></div>
                 </div>
                 {% elif result=='invalid-code' %}
@@ -152,7 +152,7 @@
             }
             console.log("sfsafas")
             var layout = {
-                title: 'Grade-Distributions',
+                title: 'Grade-Distributions for Course: ' + '{{courseCode}}',
                 showlegend: true,
                 titlefont: {
                     family: 'Courier New, monospace',
@@ -168,7 +168,7 @@
                 }
             };
             var layout1 = {
-                title: 'Grade-Distributions',
+                title: 'Grade-Distributions for Course: ' + '{{courseCode}}',
                 showlegend: true,
                 legend: {
                 x: 20,
