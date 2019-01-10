@@ -30,6 +30,12 @@ def home():
         code = code.upper()
         code = "".join(code.split())
         code = code[:7]
+        Courselink = ""
+        with open("data_file.json","r") as read_file:
+            data = json.load(read_file)
+        for key in data.keys():
+            if(key == code ):
+                Courselink = "https://wiki.metakgp.org" + data[key]
         Grades = SearchGrades(code)
         numberRecords = len (Grades)
         
@@ -41,7 +47,7 @@ def home():
                 return render_template('kronos.html',courseCode = code, Grades = Grades, result = "invalid-code", courses = courses)
         
         else:
-            return render_template('kronos.html',courseCode = code, Grades = Grades, result = "show-grades",courses = courses)
+            return render_template('kronos.html',courseCode = code, Grades = Grades, result = "show-grades",courses = courses, Cwikilink = Courselink)
 
     else:
         Grades = {}

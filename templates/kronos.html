@@ -2,6 +2,7 @@
 
 <html>
     <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <meta charset = "UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <meta name="description" content="A web based application to serve previous year grades distribution of IITKGP, IIT Kharagpur by metakgp">
@@ -49,12 +50,16 @@
                 </div>
                 {% if result=='show-grades' %}
                 <div id="show-grades">
-                    <div id = "final-graph"></div>
-                    <p><center>
+                  <div id = "final-graph"></div>
+                    <p>
+                      <center>
                     <button id="Percentage" class="btn btn-info" type='button'>Show graph w.r.t Percentage of Students</button>
                     <button id="Student" class="btn btn-info" type='button'> Show graph w.r.t Number of Students</button>
                      </center>
                     </p>
+                      <center>
+                        <button type="button" class="btn btn-success" onclick="location.href = '{{Cwikilink}}';">MetaKGP wiki for course: {{courseCode}}</button>
+                      </center>
                 </div>
                 {% elif result=='invalid-code' %}
                 <div id="invalid-code">
@@ -198,6 +203,10 @@
             $("#Percentage").click(function(){
                 Plotly.newPlot('final-graph', data, layout);
             });
+          if('{{Cwikilink}}' == "")
+            {
+                $("#Courselink").fadeOut(1);
+            }
         </script>
     </body>
 </html>
