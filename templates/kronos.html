@@ -4,6 +4,7 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <meta charset = "UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <meta name="description" content="A web based application to serve previous year grades distribution of IITKGP, IIT Kharagpur by metakgp">
         <meta name="keywords" content="Kronos,Metakgp,Grades,Grade distribution,IIT Kharagpur,Kharagpur,IITKGP,KGP,Marks,Courses">
         <meta name="author" content="Metakgp">
@@ -49,8 +50,16 @@
                 </div>
                 {% if result=='show-grades' %}
                 <div id="show-grades">
-                    <div id = "final-graph"></div>
-                    <center><button type="button" class="btn btn-success" onclick="location.href = '{{Cwikilink}}';">MetaKGP wiki for course: {{courseCode}}</button></center>
+                  <div id = "final-graph"></div>
+                    <p>
+                      <center>
+                    <button id="Percentage" class="btn btn-info" type='button'>Show graph w.r.t Percentage of Students</button>
+                    <button id="Student" class="btn btn-info" type='button'> Show graph w.r.t Number of Students</button>
+                     </center>
+                    </p>
+                      <center>
+                        <button type="button" class="btn btn-success" onclick="location.href = '{{Cwikilink}}';">MetaKGP wiki for course: {{courseCode}}</button>
+                      </center>
                 </div>
                 {% elif result=='invalid-code' %}
                 <div id="invalid-code">
@@ -75,6 +84,7 @@
             var gradesdist = {{Grades|safe}};
             var sorted_keys = [];
             var data = []; //final dataset
+            var data1 = [];//final datset 2(for different y axis)
             var possible_grades = ['EX','A','B','C','D','P','F'];
             var grades_percent = [];
             var total = [];
@@ -118,24 +128,37 @@
                 var x =  sorted_keys[i];
 
                 this_sem = {};
+                this_sem1 = {};
                 this_sem ["name"] = x;
-
+                this_sem1 ["name"] = x;
                 grades_ordered = [];
+                grades_ordered1=[]
                 grades_ordered.push(gradesdist[x]["EX"]*100/total[i]);
+                grades_ordered1.push(gradesdist[x]["EX"]);
                 grades_ordered.push(gradesdist[x]["A"]*100/total[i]);
+                grades_ordered1.push(gradesdist[x]["A"]);
                 grades_ordered.push(gradesdist[x]["B"]*100/total[i]);
+                grades_ordered1.push(gradesdist[x]["B"]);
                 grades_ordered.push(gradesdist[x]["C"]*100/total[i]);
+                grades_ordered1.push(gradesdist[x]["C"]);
                 grades_ordered.push(gradesdist[x]["D"]*100/total[i]);
+                grades_ordered1.push(gradesdist[x]["D"]);
                 grades_ordered.push(gradesdist[x]["P"]*100/total[i]);
+                grades_ordered1.push(gradesdist[x]["P"]);
                 grades_ordered.push(gradesdist[x]["F"]*100/total[i]);
+                grades_ordered1.push(gradesdist[x]["F"]);
                 this_sem ["y"] = grades_ordered;
+                this_sem1 ["y"] = grades_ordered1;
                 this_sem ["x"] = possible_grades;
+                this_sem1 ["x"] = possible_grades;
                 this_sem ["mode"] =  "lines+markers";
+                this_sem1 ["type"] = "line+markers"
                 data.push(this_sem);
+                data1.push(this_sem1);
             }
             console.log("sfsafas")
             var layout = {
-                title: 'Grade-Distributions',
+                title: 'Grade-Distributions for Course: ' + '{{courseCode}}',
                 showlegend: true,
                 titlefont: {
                     family: 'Courier New, monospace',
@@ -150,14 +173,40 @@
                     zeroline: true
                 }
             };
+            var layout1 = {
+                title: 'Grade-Distributions for Course: ' + '{{courseCode}}',
+                showlegend: true,
+                legend: {
+                x: 20,
+                y: 20
+                },
+                titlefont: {
+                    family: 'Courier New, monospace',
+                },
+                xaxis: {
+                    title: 'Grades'
+                },
+                yaxis: {
+                    title: 'No. of students',
+                    rangemode: 'tozero',
+                    showline: true,
+                    zeroline: true
+                }
+                
+            };       
 
             Plotly.newPlot('final-graph', data, layout);
-            
-            if('{{Cwikilink}}' == "")
+
+            $("#Student").click(function(){
+            Plotly.newPlot('final-graph', data1, layout1);
+            });
+            $("#Percentage").click(function(){
+                Plotly.newPlot('final-graph', data, layout);
+            });
+          if('{{Cwikilink}}' == "")
             {
                 $("#Courselink").fadeOut(1);
             }
-
         </script>
     </body>
 </html>
