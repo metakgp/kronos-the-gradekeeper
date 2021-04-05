@@ -58,7 +58,7 @@
                      </center>
                     </p>
                       <center>
-                        <button type="button" class="btn btn-success" onclick="window.open('{{Cwikilink}}', '_blank');">MetaKGP wiki for course: {{courseCode}}</button>
+                        <button id = "Courselink" type="button" class="btn btn-success" onclick="window.open('{{Cwikilink}}', '_blank');">MetaKGP wiki for course: {{courseCode}}</button>
                       </center>
                 </div>
                 {% elif result=='invalid-code' %}
@@ -156,7 +156,7 @@
                 data.push(this_sem);
                 data1.push(this_sem1);
             }
-            console.log("sfsafas")
+
             var layout = {
                 title: 'Grade-Distributions for Course: ' + '{{courseCode}}',
                 showlegend: true,
