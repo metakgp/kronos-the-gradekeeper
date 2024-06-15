@@ -1,7 +1,7 @@
 click==6.7
 cycler==0.10.0
 Flask==1.0.2
-gunicorn==19.9.0
+gunicorn==22.0.0
 itsdangerous==0.24
 Jinja2==2.11.3
 kiwisolver==1.0.1
